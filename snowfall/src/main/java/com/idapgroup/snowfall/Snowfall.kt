@@ -24,19 +24,21 @@ import kotlin.time.Duration.Companion.nanoseconds
  * Creates flakes falling animation base on `FlakeType` param.
  * @param type - type of flake.
  */
-fun Modifier.snowfall(type: FlakeType = FlakeType.Snowflakes) = letItSnow(type, AnimType.Falling)
+public fun Modifier.snowfall(type: FlakeType = FlakeType.Snowflakes): Modifier =
+    letItSnow(type, AnimType.Falling)
 
 /**
  * Creates flakes melting animation base on `FlakeType` param.
  * @param type - type of flake.
  */
-fun Modifier.snowmelt(type: FlakeType = FlakeType.Snowflakes) = letItSnow(type, AnimType.Melting)
+public fun Modifier.snowmelt(type: FlakeType = FlakeType.Snowflakes): Modifier =
+    letItSnow(type, AnimType.Melting)
 
 
 private fun Modifier.letItSnow(
     flakeType: FlakeType,
     animType: AnimType,
-)  = composed {
+) = composed {
     val flakes = when (flakeType) {
         is FlakeType.Custom -> flakeType.data
         is FlakeType.Snowflakes -> getDefaultFlakes()

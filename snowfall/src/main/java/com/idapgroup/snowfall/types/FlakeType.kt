@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.painter.Painter
 /**
  * Type of flake used for animation.
  */
-sealed interface FlakeType {
-    object Snowflakes: FlakeType
-    class Custom(val data: List<Painter>): FlakeType
+public sealed interface FlakeType {
+    public data object Snowflakes: FlakeType
+    public class Custom(public val data: List<Painter>): FlakeType
 }

@@ -16,7 +16,7 @@ import com.idapgroup.snowfall.Constants.baseFrameDurationMillis
 import kotlin.math.cos
 import kotlin.math.sin
 
-interface Snowflake {
+internal interface Snowflake {
     fun update(elapsedMillis: Long)
     fun draw(contentDrawScope: ContentDrawScope)
 }

@@ -1,6 +1,6 @@
 package com.idapgroup.snowfall
 
-object Constants {
+internal object Constants {
     internal const val angleRange = 0.1f
     internal const val angleDivisor = 10000.0f
     internal const val angleSeed = 100.0f

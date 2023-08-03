@@ -37,7 +37,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.8'
+        kotlinCompilerExtensionVersion '1.5.1'
     }
     packagingOptions {
         resources {
@@ -47,7 +47,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":snowfall"))
+//    implementation(project(":snowfall"))
+    implementation 'com.github.idapgroup:Snowfall:0.7.2'
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.22')
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
