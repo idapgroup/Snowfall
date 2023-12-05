@@ -3,7 +3,6 @@ package com.idapgroup.snowfall.sample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
@@ -23,9 +21,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.graphics.Color.Companion.Cyan
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.Preview
@@ -53,6 +53,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Snowfall(modifier: Modifier = Modifier) {
+    val colors = listOf<Color>(
+        Yellow, Green, White, Cyan, Blue
+    )
     Column(modifier = modifier) {
         Box(
             modifier = Modifier
@@ -60,8 +63,8 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(150.dp)
                 .background(Color.DarkGray, shape = RoundedCornerShape(8.dp))
-                .snowfall()
-                .snowmelt()
+                .snowfall(colors = colors)
+                .snowmelt(colors = colors)
         )
         Box(
             modifier = Modifier
@@ -69,7 +72,7 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(150.dp)
                 .background(Color.DarkGray, shape = RoundedCornerShape(8.dp))
-                .snowmelt()
+                .snowmelt(colors = colors)
         )
         val data = listOf(
             rememberVectorPainter(image = Icons.Rounded.BackHand),
@@ -84,7 +87,7 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(150.dp)
                 .background(Blue, shape = RoundedCornerShape(8.dp))
-                .snowfall(FlakeType.Custom(data))
+                .snowfall(FlakeType.Custom(data),colors = colors)
         )
         Box(
             modifier = Modifier
@@ -92,7 +95,7 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(150.dp)
                 .background(Color.Gray, shape = RoundedCornerShape(8.dp))
-                .snowmelt(FlakeType.Custom(data))
+                .snowmelt(FlakeType.Custom(data),colors = colors)
         )
     }
 

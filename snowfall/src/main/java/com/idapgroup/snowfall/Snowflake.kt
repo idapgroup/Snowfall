@@ -1,5 +1,6 @@
 package com.idapgroup.snowfall
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -27,10 +28,11 @@ internal class MeltingSnowflake(
     private val canvasSize: IntSize,
     private val maxAlpha: Float,
     private val painter: Painter,
+    private val color: Color
 ) : Snowflake {
 
     init {
-        require(maxAlpha in 0.1 .. 1.0)
+        require(maxAlpha in 0.1..1.0)
     }
 
     private var position by mutableStateOf(position)
@@ -66,7 +68,7 @@ internal class MeltingSnowflake(
                     draw(
                         size = intrinsicSize,
                         alpha = alpha,
-                        colorFilter = ColorFilter.tint(Color.White)
+                        colorFilter = ColorFilter.tint(color = color)
                     )
                 }
             }
@@ -81,6 +83,7 @@ internal class FallingSnowflake(
     position: Offset,
     angle: Double,
     private val painter: Painter,
+    private val color: Color
 ) : Snowflake {
     private val baseSpeedPxAt60Fps = 5
     private var position by mutableStateOf(position)
@@ -106,10 +109,11 @@ internal class FallingSnowflake(
                 position.y
             ) {
                 with(painter) {
+                    Log.d("Snowflake", "draw: color=$color")
                     draw(
                         intrinsicSize,
                         0.65f,
-                        ColorFilter.tint(Color.White)
+                        ColorFilter.tint(color)
                     )
                 }
             }

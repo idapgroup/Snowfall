@@ -1,5 +1,6 @@
 package com.idapgroup.snowfall
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
@@ -24,20 +26,28 @@ import kotlin.time.Duration.Companion.nanoseconds
  * Creates flakes falling animation base on `FlakeType` param.
  * @param type - type of flake.
  */
-public fun Modifier.snowfall(type: FlakeType = FlakeType.Snowflakes): Modifier =
-    letItSnow(type, AnimType.Falling)
+public fun Modifier.snowfall(
+    type: FlakeType = FlakeType.Snowflakes,
+    colors: List<Color> = listOf(Color.White)
+): Modifier =
+    letItSnow(type, AnimType.Falling, colors = colors)
 
 /**
  * Creates flakes melting animation base on `FlakeType` param.
  * @param type - type of flake.
+ * @param colors - list of Colors for Flakes
  */
-public fun Modifier.snowmelt(type: FlakeType = FlakeType.Snowflakes): Modifier =
-    letItSnow(type, AnimType.Melting)
+public fun Modifier.snowmelt(
+    type: FlakeType = FlakeType.Snowflakes,
+    colors: List<Color> = listOf(Color.White)
+): Modifier =
+    letItSnow(type, AnimType.Melting, colors = colors)
 
 
 private fun Modifier.letItSnow(
     flakeType: FlakeType,
     animType: AnimType,
+    colors: List<Color>
 ) = composed {
     val flakes = when (flakeType) {
         is FlakeType.Custom -> flakeType.data
@@ -49,7 +59,8 @@ private fun Modifier.letItSnow(
                 tick = -1,
                 canvasSize = IntSize(0, 0),
                 painters = flakes,
-                animType = animType
+                animType = animType,
+                colors = colors
             )
         )
     }
@@ -62,7 +73,11 @@ private fun Modifier.letItSnow(
                 snowAnimState.tickNanos = frameTimeNanos
 
                 if (isFirstRun) return@withFrameNanos
-                snowAnimState.snowflakes.forEach { it.update(elapsedMillis) }
+                snowAnimState.snowflakes.forEach {
+                    Log.d("Snowflake", "draw: color=")
+
+                    it.update(elapsedMillis)
+                }
             }
         }
     }
