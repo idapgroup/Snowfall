@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
+import com.idapgroup.snowfall.Constants.snowflakeDensity
 import com.idapgroup.snowfall.types.AnimType
 import com.idapgroup.snowfall.types.FlakeType
 import kotlinx.coroutines.isActive
@@ -25,29 +26,37 @@ import kotlin.time.Duration.Companion.nanoseconds
 /**
  * Creates flakes falling animation base on `FlakeType` param.
  * @param type - type of flake.
+ * @param colors - list of Colors for Flakes
+ * @param density - density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes)
+ * Defaults to 0.05
  */
 public fun Modifier.snowfall(
     type: FlakeType = FlakeType.Snowflakes,
-    colors: List<Color> = listOf(Color.White)
+    colors: List<Color> = listOf(Color.White),
+    density: Double = snowflakeDensity,
 ): Modifier =
-    letItSnow(type, AnimType.Falling, colors = colors)
+    letItSnow(type, AnimType.Falling, colors = colors, density)
 
 /**
  * Creates flakes melting animation base on `FlakeType` param.
  * @param type - type of flake.
  * @param colors - list of Colors for Flakes
+ * @param density - density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes).
+ * Defaults to 0.05
  */
 public fun Modifier.snowmelt(
     type: FlakeType = FlakeType.Snowflakes,
-    colors: List<Color> = listOf(Color.White)
+    colors: List<Color> = listOf(Color.White),
+    density: Double = snowflakeDensity
 ): Modifier =
-    letItSnow(type, AnimType.Melting, colors = colors)
+    letItSnow(type, AnimType.Melting, colors = colors, density = density)
 
 
 private fun Modifier.letItSnow(
     flakeType: FlakeType,
     animType: AnimType,
-    colors: List<Color>
+    colors: List<Color>,
+    density: Double
 ) = composed {
     val flakes = when (flakeType) {
         is FlakeType.Custom -> flakeType.data
@@ -60,7 +69,8 @@ private fun Modifier.letItSnow(
                 canvasSize = IntSize(0, 0),
                 painters = flakes,
                 animType = animType,
-                colors = colors
+                colors = colors,
+                density = density
             )
         )
     }
