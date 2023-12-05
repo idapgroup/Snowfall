@@ -84,8 +84,6 @@ private fun Modifier.letItSnow(
 
                 if (isFirstRun) return@withFrameNanos
                 snowAnimState.snowflakes.forEach {
-                    Log.d("Snowflake", "draw: color=")
-
                     it.update(elapsedMillis)
                 }
             }

@@ -1,6 +1,5 @@
 package com.idapgroup.snowfall
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -109,7 +108,6 @@ internal class FallingSnowflake(
                 position.y
             ) {
                 with(painter) {
-                    Log.d("Snowflake", "draw: color=$color")
                     draw(
                         intrinsicSize,
                         0.65f,
