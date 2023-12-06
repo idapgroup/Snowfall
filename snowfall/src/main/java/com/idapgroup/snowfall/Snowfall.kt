@@ -30,7 +30,7 @@ import kotlin.time.Duration.Companion.nanoseconds
  */
 public fun Modifier.snowfall(
     type: FlakeType = FlakeType.Snowflakes,
-    colors: List<Color> = listOf(Color.White),
+    colors: List<Color>,
     density: Double = snowflakeDensity,
 ): Modifier =
     letItSnow(type, AnimType.Falling, colors = colors, density)
@@ -57,7 +57,7 @@ public fun Modifier.snowfall(
  */
 public fun Modifier.snowmelt(
     type: FlakeType = FlakeType.Snowflakes,
-    colors: List<Color> = listOf(Color.White),
+    colors: List<Color>,
     density: Double = snowflakeDensity
 ): Modifier =
     letItSnow(type, AnimType.Melting, colors = colors, density = density)

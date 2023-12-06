@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Snowfall(modifier: Modifier = Modifier) {
-    val colors = listOf<Color>(
+    val colors = listOf(
         Yellow, Green, White, Cyan, Blue
     )
     Column(modifier = modifier) {
@@ -104,7 +104,7 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(150.dp)
                 .background(Color.Gray, shape = RoundedCornerShape(8.dp))
-                .snowmelt(FlakeType.Custom(data),colors = colors)
+                .snowmelt(FlakeType.Custom(data), color = Color.Red)
         )
     }
 
