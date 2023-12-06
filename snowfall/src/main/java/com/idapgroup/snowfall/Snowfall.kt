@@ -1,6 +1,5 @@
 package com.idapgroup.snowfall
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,10 +24,9 @@ import kotlin.time.Duration.Companion.nanoseconds
 
 /**
  * Creates flakes falling animation base on `FlakeType` param.
- * @param type - type of flake.
- * @param colors - list of Colors for Flakes
- * @param density - density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes)
- * Defaults to 0.05
+ * @param type type of flake.
+ * @param colors list of Colors for Flakes
+ * @param density density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes). Default is 0.05
  */
 public fun Modifier.snowfall(
     type: FlakeType = FlakeType.Snowflakes,
@@ -38,11 +36,24 @@ public fun Modifier.snowfall(
     letItSnow(type, AnimType.Falling, colors = colors, density)
 
 /**
+ * Creates flakes falling animation base on `FlakeType` param.
+ * @param type type of flake.
+ * @param color single Color for Flakes
+ * @param density density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes). Default is 0.05
+ */
+public fun Modifier.snowfall(
+    type: FlakeType = FlakeType.Snowflakes,
+    color: Color = Color.White,
+    density: Double = snowflakeDensity,
+): Modifier =
+    letItSnow(type, AnimType.Falling, colors = listOf(color), density)
+
+/**
  * Creates flakes melting animation base on `FlakeType` param.
  * @param type - type of flake.
  * @param colors - list of Colors for Flakes
- * @param density - density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes).
- * Defaults to 0.05
+ * @param density - density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes). Default is 0.05
+ *
  */
 public fun Modifier.snowmelt(
     type: FlakeType = FlakeType.Snowflakes,
@@ -50,6 +61,20 @@ public fun Modifier.snowmelt(
     density: Double = snowflakeDensity
 ): Modifier =
     letItSnow(type, AnimType.Melting, colors = colors, density = density)
+
+/**
+ * Creates flakes melting animation base on `FlakeType` param.
+ * @param type - type of flake.
+ * @param color - single Color for Flakes
+ * @param density - density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes). Default is 0.05
+ *
+ */
+public fun Modifier.snowmelt(
+    type: FlakeType = FlakeType.Snowflakes,
+    color: Color = Color.White,
+    density: Double = snowflakeDensity
+): Modifier =
+    letItSnow(type, AnimType.Melting, colors = listOf(color), density = density)
 
 
 private fun Modifier.letItSnow(

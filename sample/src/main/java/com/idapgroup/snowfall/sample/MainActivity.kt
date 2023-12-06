@@ -63,8 +63,17 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(150.dp)
                 .background(Color.DarkGray, shape = RoundedCornerShape(8.dp))
-                .snowfall(colors = colors, density = 0.1)
+                .snowfall(colors = colors, density = 0.9)
                 .snowmelt(colors = colors)
+        )
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .height(150.dp)
+                .background(Color.DarkGray, shape = RoundedCornerShape(8.dp))
+//                .snowfall(color = Color.Green, density = 0.2)
+                .snowmelt(color = Color.Yellow, density = 0.5)
         )
         Box(
             modifier = Modifier

@@ -11,7 +11,6 @@ import com.idapgroup.snowfall.Constants.sizeRange
 import com.idapgroup.snowfall.types.AnimType
 import kotlin.math.PI
 import kotlin.math.roundToInt
-import kotlin.random.Random
 
 internal data class SnowAnimState(
     var tickNanos: Long,
@@ -57,7 +56,6 @@ internal data class SnowAnimState(
             animType: AnimType,
             colors: List<Color>,
             density: Double
-
         ): List<Snowflake> =
             when (animType) {
                 AnimType.Falling -> createFallingSnowflakes(
@@ -66,7 +64,6 @@ internal data class SnowAnimState(
                     colors,
                     density,
                 )
-
                 AnimType.Melting -> createMeltingSnowflakes(
                     canvasSize,
                     flakesProvider,
@@ -80,21 +77,24 @@ internal data class SnowAnimState(
             painters: List<Painter>,
             colors: List<Color>,
             snowflakeDensity: Double,
-
             ): List<MeltingSnowflake> {
-
-            if (canvasSize.height == 0 || canvasSize.width == 0) {
+            if (canvasSize.height == 0 || canvasSize.width == 0 || snowflakeDensity == 0.0) {
                 return emptyList()
             }
 
-            return List(painters.size) {
+            val canvasArea = canvasSize.width * canvasSize.height
+            val normalizedDensity = snowflakeDensity.coerceIn(0.0..1.0) / 2000.0
+            val count = (canvasArea * normalizedDensity).roundToInt()
+            val snowflakesCount = count.coerceIn(painters.size, count)
+
+            return List(snowflakesCount) {
                 MeltingSnowflake(
                     incrementFactor = incrementRange.random(),
                     canvasSize = canvasSize,
                     maxAlpha = (0.1f..0.7f).random(),
-                    painter = painters[it],
+                    painter = painters[it % painters.size],
                     position = canvasSize.randomPosition(),
-                    color = colors[Random.nextInt(colors.size)]
+                    color = colors.random(),
                 )
             }
         }
@@ -117,7 +117,7 @@ internal data class SnowAnimState(
                     position = canvasSize.randomPosition(),
                     angle = angleSeed.random() / angleSeed * angleRange + (PI / 2.0) - (angleRange / 2.0),
                     painter = painters[it % painters.size],
-                    color = colors[Random.nextInt(colors.size)]
+                    color = colors.random(),
                 )
             }
         }

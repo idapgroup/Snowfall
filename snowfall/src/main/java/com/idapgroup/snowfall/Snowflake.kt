@@ -1,6 +1,8 @@
 package com.idapgroup.snowfall
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
@@ -35,7 +37,7 @@ internal class MeltingSnowflake(
     }
 
     private var position by mutableStateOf(position)
-    private var alpha by mutableStateOf(0.001f)
+    private var alpha by mutableFloatStateOf(0.001f)
     private var isIncreasing by mutableStateOf(true)
 
     override fun update(elapsedMillis: Long) {
@@ -86,7 +88,7 @@ internal class FallingSnowflake(
 ) : Snowflake {
     private val baseSpeedPxAt60Fps = 5
     private var position by mutableStateOf(position)
-    private var angle by mutableStateOf(angle)
+    private var angle by mutableDoubleStateOf(angle)
 
     override fun update(elapsedMillis: Long) {
         val increment =
