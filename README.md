@@ -14,13 +14,14 @@ repositories {
 Add to your module next dependency:
 ```groovy
 dependencies {
-  implementation 'com.github.idapgroup:Snowfall:0.7.7'
+  implementation 'com.github.idapgroup:Snowfall:0.8.1'
 }
 ```
 `Note:` Do not forget to add compose dependencies 🙃
 
 ## Usage sample
 Library has 2 base functions to use as an extension function for `Modifier`.
+
 ### Snowfall
 It is pretty simple to use. Just add `.snowfall()` to any modifier where you want to see the animation
 ```kotlin
@@ -32,7 +33,8 @@ It is pretty simple to use. Just add `.snowfall()` to any modifier where you wan
         )
 ```
 
-It also allows you to put any painter list to make your own `any`flakes animation.
+#### Custom flakes
+If you want to customize snowflakes to any other image, the library allows you to put any painter list to make your own flakes animation.
 ```kotlin
         val data = listOf(
             rememberVectorPainter(image = Icons.Rounded.Add),
@@ -51,6 +53,22 @@ It also allows you to put any painter list to make your own `any`flakes animatio
 
 ```
 [icon-falling.webm](https://github.com/idapgroup/Snowfall/assets/12797421/6ad70d1e-b085-459d-a775-b7f3c20b5d98)
+
+#### Colors list and density
+It is also possible to randomize different colors and flakes density for your purposes.
+```kotlin
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxSize()
+                .snowfall(
+                  colors = listOf(Color.Green, Color.Yellow, Color.Blue, Color.Red),
+                  density = 0.5 // from 0.0 to 1.0
+                )
+        )
+```
+[snowfall-colors-dencity.webm](https://github.com/idapgroup/Snowfall/assets/12797421/ef466018-5ddc-418d-819d-ab3c451e6ee4)
+
 ### Snowmelt
 Melting has the same usage as a falling.
 ```kotlin
@@ -67,16 +85,28 @@ Melting has the same usage as a falling.
 
 And also allows you to customize flakes:
 ```kotlin
-        Box(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-                .height(400.dp)
-                .background(Color.Gray, shape = RoundedCornerShape(8.dp))
-                .snowmelt(FlakeType.Custom(data))
-        )
+    val data = listOf(
+        rememberVectorPainter(image = Icons.Rounded.Add),
+        rememberVectorPainter(image = Icons.Rounded.AccountBox),
+        rememberVectorPainter(image = Icons.Rounded.Abc),
+        rememberVectorPainter(image = Icons.Rounded.Alarm),
+    )
+    val colors = listOf(Color.Yellow, Color.Blue, Color.Red, Color.Green, Color.Cyan)
+    Box(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+            .height(400.dp)
+            .background(Color.DarkGray, shape = RoundedCornerShape(8.dp))
+            .snowmelt(
+                type = FlakeType.Custom(data),
+                colors = colors,
+                density = 0.2
+            )
+    )
 ```
-[melting-custom.webm](https://github.com/idapgroup/Snowfall/assets/12797421/fb40b686-c95a-4dae-98c4-4e5194a97f84)
+[snowmelt-custom-colors-density.webm](https://github.com/idapgroup/Snowfall/assets/12797421/f50c9616-8617-43d1-bc7b-024480d433d4)
+
 
 ### Combining
 
