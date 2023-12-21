@@ -99,7 +99,7 @@ internal class FallingSnowflake(
         angle += angleSeedRange.random() / angleDivisor
 
         if (position.y > canvasSize.height + size) {
-            position = Offset(canvasSize.width.random().toFloat(), -size)
+            position = Offset(canvasSize.width.random().toFloat(), -size - painter.intrinsicSize.height)
         }
     }
 
