@@ -1,5 +1,10 @@
 package com.idapgroup.snowfall
 
+import android.hardware.Sensor
+import android.hardware.SensorManager
+import android.hardware.TriggerEvent
+import android.hardware.TriggerEventListener
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -14,11 +19,14 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
+import androidx.core.content.getSystemService
 import com.idapgroup.snowfall.Constants.snowflakeDensity
 import com.idapgroup.snowfall.types.AnimType
 import com.idapgroup.snowfall.types.FlakeType
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlin.time.Duration.Companion.nanoseconds
 
@@ -107,11 +115,13 @@ private fun Modifier.letItSnow(
                 val isFirstRun = snowAnimState.tickNanos < 0
                 snowAnimState.tickNanos = frameTimeNanos
 
-                if (isFirstRun) return@withFrameNanos
+                if (isFirstRun) return@withFrameNanos 0
                 snowAnimState.snowflakes.forEach {
                     it.update(elapsedMillis)
                 }
+                return@withFrameNanos frameTimeNanos
             }
+            delay(8L)
         }
     }
     onSizeChanged { newSize -> snowAnimState = snowAnimState.resize(newSize) }
