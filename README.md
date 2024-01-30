@@ -1,5 +1,6 @@
-# Snowfall
-Android Snowfall compose animation
+# Snowfall Compose
+![Latest Version](https://img.shields.io/github/v/release/idapgroup/Snowfall)
+Small Android Snowfall compose animation
 
 [snowfall-base.webm](https://github.com/idapgroup/Snowfall/assets/12797421/237a6f42-d862-456d-9221-6e0a1e451e5d)
 ## Setup
@@ -14,7 +15,7 @@ repositories {
 Add to your module next dependency:
 ```groovy
 dependencies {
-  implementation 'com.github.idapgroup:Snowfall:0.8.2'
+  implementation 'com.github.idapgroup:Snowfall:0.8.3'
 }
 ```
 `Note:` Do not forget to add compose dependencies 🙃
