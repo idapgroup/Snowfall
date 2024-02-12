@@ -16,7 +16,7 @@ repositories {
 Add to your module next dependency:
 ```groovy
 dependencies {
-  implementation 'com.github.idapgroup:Snowfall:0.8.3'
+  implementation 'com.github.idapgroup:Snowfall:<latest-version>'
 }
 ```
 `Note:` Do not forget to add compose dependencies 🙃
