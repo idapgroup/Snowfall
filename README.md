@@ -16,7 +16,7 @@ repositories {
 Add to your module next dependency:
 ```groovy
 dependencies {
-  implementation 'com.github.idapgroup:Snowfall:0.8.3'
+  implementation 'com.github.idapgroup:Snowfall:<latest-version>'
 }
 ```
 `Note:` Do not forget to add compose dependencies 🙃
@@ -126,6 +126,11 @@ You can also combine as many options as you want:
         )
 ```
 [combining.webm](https://github.com/idapgroup/Snowfall/assets/12797421/dbca6ac0-b84d-4e32-8328-125df552d259)
+
+## Kudos
+
+Big thanks to ![Volodymyr Kondratenko](https://github.com/ochkarik05) for inspiriation and source code for the first version of this library.
+
 
 
 
