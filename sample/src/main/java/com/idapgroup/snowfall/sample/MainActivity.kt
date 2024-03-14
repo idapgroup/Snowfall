@@ -67,7 +67,7 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .height(150.dp)
                 .background(Color.DarkGray, shape = RoundedCornerShape(8.dp))
                 .clip(shape = RoundedCornerShape(8.dp))
-                .snowfall(colors = colors, density = 0.9)
+                .snowfall(colors = colors, density = 0.9, alpha = 1f)
                 .snowmelt(colors = colors)
         )
         Box(
@@ -102,7 +102,7 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .height(150.dp)
                 .background(Blue, shape = RoundedCornerShape(8.dp))
                 .clip(shape = RoundedCornerShape(8.dp))
-                .snowfall(FlakeType.Custom(data), colors = colors)
+                .snowfall(FlakeType.Custom(data), colors = colors, alpha = 0.1f)
         )
         Box(
             modifier = Modifier
@@ -111,7 +111,7 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .height(150.dp)
                 .background(Color.Gray, shape = RoundedCornerShape(8.dp))
                 .clip(shape = RoundedCornerShape(8.dp))
-                .snowmelt(FlakeType.Custom(data), color = Color.Red)
+                .snowmelt(FlakeType.Custom(data))
         )
     }
 

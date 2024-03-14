@@ -1,10 +1,5 @@
 package com.idapgroup.snowfall
 
-import android.hardware.Sensor
-import android.hardware.SensorManager
-import android.hardware.TriggerEvent
-import android.hardware.TriggerEventListener
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,10 +14,9 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
-import androidx.core.content.getSystemService
+import com.idapgroup.snowfall.Constants.defaultAlpha
 import com.idapgroup.snowfall.Constants.snowflakeDensity
 import com.idapgroup.snowfall.types.AnimType
 import com.idapgroup.snowfall.types.FlakeType
@@ -35,26 +29,42 @@ import kotlin.time.Duration.Companion.nanoseconds
  * @param type type of flake.
  * @param colors list of Colors for Flakes
  * @param density density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes). Default is 0.05
+ * @param alpha transparency of the falling flakes
+ *
  */
 public fun Modifier.snowfall(
     type: FlakeType = FlakeType.Snowflakes,
     colors: List<Color>,
     density: Double = snowflakeDensity,
+    alpha: Float = defaultAlpha,
 ): Modifier =
-    letItSnow(type, AnimType.Falling, colors = colors, density)
+    letItSnow(
+        flakeType = type,
+        animType = AnimType.Falling, colors = colors,
+        density = density,
+        alpha = alpha
+    )
 
 /**
  * Creates flakes falling animation base on `FlakeType` param.
  * @param type type of flake.
  * @param color single Color for Flakes
  * @param density density of Flakes must be between 0.0 (no Flakes) or 1.0 (a lot of Flakes). Default is 0.05
+ * @param alpha transparency of the falling flakes
+ *
  */
 public fun Modifier.snowfall(
     type: FlakeType = FlakeType.Snowflakes,
-    color: Color = Color.White,
+    color: Color = Color.Unspecified,
     density: Double = snowflakeDensity,
+    alpha: Float = defaultAlpha,
 ): Modifier =
-    letItSnow(type, AnimType.Falling, colors = listOf(color), density)
+    letItSnow(
+        flakeType = type,
+        animType = AnimType.Falling, colors = listOf(color),
+        density = density,
+        alpha = alpha
+    )
 
 /**
  * Creates flakes melting animation base on `FlakeType` param.
@@ -66,7 +76,7 @@ public fun Modifier.snowfall(
 public fun Modifier.snowmelt(
     type: FlakeType = FlakeType.Snowflakes,
     colors: List<Color>,
-    density: Double = snowflakeDensity
+    density: Double = snowflakeDensity,
 ): Modifier =
     letItSnow(type, AnimType.Melting, colors = colors, density = density)
 
@@ -79,8 +89,8 @@ public fun Modifier.snowmelt(
  */
 public fun Modifier.snowmelt(
     type: FlakeType = FlakeType.Snowflakes,
-    color: Color = Color.White,
-    density: Double = snowflakeDensity
+    color: Color = Color.Unspecified,
+    density: Double = snowflakeDensity,
 ): Modifier =
     letItSnow(type, AnimType.Melting, colors = listOf(color), density = density)
 
@@ -89,7 +99,8 @@ private fun Modifier.letItSnow(
     flakeType: FlakeType,
     animType: AnimType,
     colors: List<Color>,
-    density: Double
+    density: Double,
+    alpha: Float = 1f,
 ) = composed {
     val flakes = when (flakeType) {
         is FlakeType.Custom -> flakeType.data
@@ -103,7 +114,8 @@ private fun Modifier.letItSnow(
                 painters = flakes,
                 animType = animType,
                 colors = colors,
-                density = density
+                density = density,
+                alpha = alpha,
             )
         )
     }

@@ -19,6 +19,7 @@ internal data class SnowAnimState(
     val animType: AnimType,
     val colors: List<Color>,
     val density: Double,
+    val alpha: Float,
 ) {
     constructor(
         tick: Long,
@@ -26,14 +27,23 @@ internal data class SnowAnimState(
         painters: List<Painter>,
         animType: AnimType,
         colors: List<Color>,
-        density: Double
+        density: Double,
+        alpha: Float
     ) : this(
-        tick,
-        createSnowFlakes(painters, canvasSize, animType, colors, density),
-        painters,
-        animType,
+        tickNanos = tick,
+        snowflakes = createSnowFlakes(
+            flakesProvider = painters,
+            canvasSize = canvasSize,
+            animType = animType,
+            colors = colors,
+            density = density,
+            alpha = alpha
+        ),
+        painters = painters,
+        animType = animType,
         colors = colors,
-        density = density
+        density = density,
+        alpha = alpha
     )
 
     fun draw(contentDrawScope: ContentDrawScope) {
@@ -44,7 +54,12 @@ internal data class SnowAnimState(
 
     fun resize(newSize: IntSize) = copy(
         snowflakes = createSnowFlakes(
-            painters, newSize, animType, colors, density
+            flakesProvider = painters,
+            canvasSize = newSize,
+            animType = animType,
+            colors = colors,
+            density = density,
+            alpha = alpha
         )
     )
 
@@ -55,20 +70,22 @@ internal data class SnowAnimState(
             canvasSize: IntSize,
             animType: AnimType,
             colors: List<Color>,
-            density: Double
+            density: Double,
+            alpha: Float,
         ): List<Snowflake> =
             when (animType) {
                 AnimType.Falling -> createFallingSnowflakes(
-                    canvasSize,
-                    flakesProvider,
-                    colors,
-                    density,
+                    canvasSize = canvasSize,
+                    painters = flakesProvider,
+                    colors = colors,
+                    snowflakeDensity = density,
+                    alpha = alpha
                 )
                 AnimType.Melting -> createMeltingSnowflakes(
-                    canvasSize,
-                    flakesProvider,
-                    colors,
-                    density,
+                    canvasSize = canvasSize,
+                    painters = flakesProvider,
+                    colors = colors,
+                    snowflakeDensity = density,
                 )
             }
 
@@ -103,7 +120,8 @@ internal data class SnowAnimState(
             canvasSize: IntSize,
             painters: List<Painter>,
             colors: List<Color>,
-            snowflakeDensity: Double
+            snowflakeDensity: Double,
+            alpha: Float,
         ): List<FallingSnowflake> {
             val canvasArea = canvasSize.width * canvasSize.height
             val normalizedDensity = snowflakeDensity.coerceIn(0.0..1.0) / 1000.0
@@ -118,6 +136,7 @@ internal data class SnowAnimState(
                     angle = angleSeed.random() / angleSeed * angleRange + (PI / 2.0) - (angleRange / 2.0),
                     painter = painters[it % painters.size],
                     color = colors.random(),
+                    alpha = alpha,
                 )
             }
         }
