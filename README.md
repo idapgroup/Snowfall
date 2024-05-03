@@ -3,7 +3,8 @@
 
 Small Android Snowfall compose animation
 
-[snowfall-base.webm](https://github.com/idapgroup/Snowfall/assets/12797421/237a6f42-d862-456d-9221-6e0a1e451e5d)
+![snowfall-base](https://github.com/idapgroup/Snowfall/assets/12797421/965be48e-c21e-4660-a6d5-4035cc4089d4)
+
 ## Setup
 Please, add to repositories jitpack:
 ```groovy
