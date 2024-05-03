@@ -100,7 +100,7 @@ fun Snowfall(modifier: Modifier = Modifier) {
                 .padding(16.dp)
                 .fillMaxWidth()
                 .height(150.dp)
-                .background(Blue, shape = RoundedCornerShape(8.dp))
+                .background(White, shape = RoundedCornerShape(8.dp))
                 .clip(shape = RoundedCornerShape(8.dp))
                 .snowfall(FlakeType.Custom(data), colors = colors, alpha = 0.1f)
         )
