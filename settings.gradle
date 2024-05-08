@@ -15,5 +15,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Snowfall"
-include ':sample'
+if (!System.env.JITPACK) include ':sample'
 include ':snowfall'
