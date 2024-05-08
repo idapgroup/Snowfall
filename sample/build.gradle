@@ -50,7 +50,7 @@ dependencies {
 //    for debug or fork purposes use commended line instead of the next line
 //    implementation(project(":snowfall"))
     implementation 'com.github.idapgroup:Snowfall:0.9.3'
-    implementation 'androidx.core:core-ktx:1.13.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.9.23')
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     implementation 'androidx.activity:activity-compose:1.9.0'
