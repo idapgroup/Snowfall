@@ -1,5 +1,6 @@
 # Snowfall Compose
-![Release](https://img.shields.io/github/v/release/idapgroup/Snowfall)
+
+[![](https://jitpack.io/v/idapgroup/Snowfall.svg)](https://jitpack.io/#idapgroup/Snowfall)
 
 Small Android Snowfall compose animation
 
