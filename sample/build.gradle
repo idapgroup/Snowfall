@@ -51,7 +51,7 @@ android {
 dependencies {
 //    for debug or fork purposes use commended line instead of the next line
 //    implementation(project(":snowfall"))
-    implementation 'com.github.idapgroup:Snowfall:0.9.9'
+    implementation 'com.github.idapgroup:Snowfall:0.9.10'
     implementation 'androidx.core:core-ktx:1.15.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'
     implementation 'androidx.activity:activity-compose:1.9.3'
